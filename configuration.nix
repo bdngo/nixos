@@ -22,7 +22,7 @@
     efi.canTouchEfiVariables = true;
   };
 
-  boot.initrd.availableKernelModules = [ "evdev" ];
+  boot.initrd.availableKernelModules = [ "usbhid" "hid_generic" ];
 
 
   # Use latest kernel.
@@ -168,4 +168,9 @@
   hardware.nvidia.open = true;
 
   programs.steam.enable = true;
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false;
+  };
 }
