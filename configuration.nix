@@ -22,6 +22,8 @@
     efi.canTouchEfiVariables = true;
   };
 
+  boot.initrd.availableKernelModules = [ "evdev" ];
+
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
