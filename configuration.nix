@@ -44,6 +44,8 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
+  i18n.extraLocales = [ "en_DK.UTF-8/UTF-8" ];
+
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";
@@ -53,7 +55,7 @@
     LC_NUMERIC = "en_US.UTF-8";
     LC_PAPER = "en_US.UTF-8";
     LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
+    LC_TIME = "en_DK.UTF-8";
   };
 
   # Enable the X11 windowing system.
@@ -101,13 +103,13 @@
       kdePackages.kate
     #  thunderbird
       kdePackages.akregator
+      kdePackages.kdeconnect-kde
       chatterino2
       discord
       fish
       joplin-desktop
       keepassxc
       kitty
-      syncthing
     ];
   };
 
@@ -124,6 +126,15 @@
   #  wget
     neovim
   ];
+
+  programs.steam.enable = true;
+
+  services.syncthing = {
+    enable = true;
+    openDefaultPorts = true;
+  };
+
+  services.flatpak.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -166,8 +177,6 @@
   hardware.graphics.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.open = true;
-
-  programs.steam.enable = true;
 
   hardware.bluetooth = {
     enable = true;
