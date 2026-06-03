@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./hardware.nix
     ];
 
   # Bootloader.
@@ -22,7 +23,7 @@
     efi.canTouchEfiVariables = true;
   };
 
-  boot.initrd.availableKernelModules = [ "usbhid" "hid_generic" ];
+  boot.initrd.availableKernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
 
 
   # Use latest kernel.
@@ -102,14 +103,16 @@
     packages = with pkgs; [
       kdePackages.kate
     #  thunderbird
-      kdePackages.akregator
-      kdePackages.kdeconnect-kde
       chatterino2
       discord
+
+      kitty
       fish
+      nh
+
       joplin-desktop
       keepassxc
-      kitty
+      rssguard
     ];
   };
 
@@ -125,9 +128,21 @@
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
     neovim
+    zellij
   ];
 
   programs.steam.enable = true;
+  programs.kdeconnect.enable = true;
+
+  # Git stuff
+  programs.git = {
+    enable = true;
+    config.user = {
+      name = "Bryan Ngo";
+      email = "jbnknn@gmail.com";
+    };
+    config.init.defaultBranch = "main";
+  };
 
   services.syncthing = {
     enable = true;
@@ -162,24 +177,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "26.05"; # Did you read the comment?
-
-  # Git stuff
-  programs.git = {
-    enable = true;
-    config.user = {
-      name = "Bryan Ngo";
-      email = "jbnknn@gmail.com";
-    };
-    config.init.defaultBranch = "main";
-  };
-  
-  # NVIDIA stuff
-  hardware.graphics.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.open = true;
-
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = false;
-  };
 }
