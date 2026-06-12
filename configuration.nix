@@ -19,6 +19,7 @@
       enable = true;
       device = "nodev";
       efiSupport = true;
+      useOSProber = true;
     };
     efi.canTouchEfiVariables = true;
   };
@@ -105,6 +106,7 @@
     #  thunderbird
       chatterino2
       discord
+      signal-desktop
 
       kitty
       fish
@@ -117,7 +119,7 @@
   };
 
   # Install firefox.
-  programs.firefox.enable = true;
+  # programs.firefox.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -130,6 +132,7 @@
     neovim
     zellij
   ];
+  environment.variables.EDITOR = "nvim";
 
   programs.steam.enable = true;
   programs.kdeconnect.enable = true;
@@ -151,6 +154,8 @@
 
   services.flatpak.enable = true;
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -169,6 +174,10 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  fonts.packages = with pkgs; [
+    nerd-fonts.fira-code
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
