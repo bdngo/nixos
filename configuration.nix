@@ -107,6 +107,7 @@
       chatterino2
       discord
       signal-desktop
+      bluebubbles
 
       kitty
       fish
