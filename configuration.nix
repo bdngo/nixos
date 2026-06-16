@@ -105,19 +105,14 @@
       kdePackages.kate
     #  thunderbird
       chatterino2
-      discord
       signal-desktop
       bluebubbles
-
-      kitty
-      fish
-      nh
-
-      joplin-desktop
-      keepassxc
-      rssguard
     ];
   };
+
+  programs.steam.enable = true;
+
+  services.flatpak.enable = true;
 
   # Install firefox.
   # programs.firefox.enable = true;
@@ -134,26 +129,6 @@
     zellij
   ];
   environment.variables.EDITOR = "nvim";
-
-  programs.steam.enable = true;
-  programs.kdeconnect.enable = true;
-
-  # Git stuff
-  programs.git = {
-    enable = true;
-    config.user = {
-      name = "Bryan Ngo";
-      email = "jbnknn@gmail.com";
-    };
-    config.init.defaultBranch = "main";
-  };
-
-  services.syncthing = {
-    enable = true;
-    openDefaultPorts = true;
-  };
-
-  services.flatpak.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
