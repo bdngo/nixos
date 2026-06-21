@@ -4,6 +4,19 @@
   home.packages = with pkgs; [
   ];
 
+  programs.bat = {
+    enable = true;
+    config = {
+      theme-light = "Solarized (light)";
+      theme-dark = "Solarized (dark)";
+    };
+  };
+
+  programs.eza = {
+    enable = true;
+    icons = "auto";
+  };
+
   programs.discord.enable = true;
 
   programs.fish.enable = true;
@@ -37,6 +50,13 @@
     };
   };
 
+  programs.uv = {
+    enable = true;
+    settings = {
+      pip.python = "3.13";
+      python-downloads = "never";
+    };
+  };
 
   services.kdeconnect.enable = true;
 

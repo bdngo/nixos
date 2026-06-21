@@ -104,9 +104,12 @@
     packages = with pkgs; [
       kdePackages.kate
     #  thunderbird
-      chatterino2
       signal-desktop
       bluebubbles
+
+      chatterino2
+
+      kicad
     ];
   };
 
@@ -127,6 +130,7 @@
   #  wget
     neovim
     zellij
+    python3
   ];
   environment.variables.EDITOR = "nvim";
 
