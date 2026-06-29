@@ -40,6 +40,11 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  networking.firewall = rec {
+    allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
+    allowedUDPPortRanges = allowedTCPPortRanges;
+  };
+
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
