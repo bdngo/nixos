@@ -5,11 +5,11 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./hardware.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./hardware.nix
+  ];
 
   # Bootloader.
   # boot.loader.systemd-boot.enable = true;
@@ -24,8 +24,12 @@
     efi.canTouchEfiVariables = true;
   };
 
-  boot.initrd.availableKernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
-
+  boot.initrd.availableKernelModules = [
+    "nvidia"
+    "nvidia_modeset"
+    "nvidia_uvm"
+    "nvidia_drm"
+  ];
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -41,7 +45,12 @@
   networking.networkmanager.enable = true;
 
   networking.firewall = rec {
-    allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
+    allowedTCPPortRanges = [
+      {
+        from = 1714;
+        to = 1764;
+      }
+    ];
     allowedUDPPortRanges = allowedTCPPortRanges;
   };
 
@@ -80,7 +89,19 @@
   };
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      cups-filters
+      cups-browsed
+    ];
+  };
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -105,16 +126,27 @@
   users.users."bngo" = {
     isNormalUser = true;
     description = "Bryan Ngo";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
       kdePackages.kate
-    #  thunderbird
+      #  thunderbird
       signal-desktop
       bluebubbles
 
       chatterino2
 
       kicad
+
+      ckan
+
+      typst
+
+      tinymist
+      nil
+      lua-language-server
     ];
   };
 
@@ -131,15 +163,18 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
     neovim
     zellij
     python3
   ];
   environment.variables.EDITOR = "nvim";
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
