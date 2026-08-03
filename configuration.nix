@@ -132,6 +132,7 @@
     ];
     packages = with pkgs; [
       kdePackages.kate
+      kdePackages.kdenlive
       #  thunderbird
       signal-desktop
       bluebubbles
@@ -147,6 +148,8 @@
       tinymist
       nil
       lua-language-server
+
+      vlc
     ];
   };
 
