@@ -50,8 +50,6 @@
     };
   };
 
-  programs.libreoffice.enable = true;
-
   programs.uv = {
     enable = true;
     settings = {
