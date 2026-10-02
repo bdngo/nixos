@@ -150,6 +150,8 @@
       lua-language-server
 
       vlc
+
+      darktable
     ];
   };
 
