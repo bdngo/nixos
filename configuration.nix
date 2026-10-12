@@ -136,7 +136,6 @@
       #  thunderbird
       signal-desktop
       bluebubbles
-
       chatterino2
 
       kicad
@@ -148,10 +147,14 @@
       tinymist
       nil
       lua-language-server
+      python313Packages.python-lsp-server
+
+      tk
 
       vlc
 
       darktable
+      libreoffice-fresh
     ];
   };
 
@@ -172,7 +175,9 @@
     #  wget
     neovim
     zellij
-    python3
+    (python3.withPackages (ps: [
+      ps.tkinter
+    ]))
   ];
   environment.variables.EDITOR = "nvim";
 

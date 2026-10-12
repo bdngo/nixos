@@ -50,6 +50,10 @@
     };
   };
 
+  programs.obsidian = {
+    enable = true;
+  };
+
   programs.uv = {
     enable = true;
     settings = {
